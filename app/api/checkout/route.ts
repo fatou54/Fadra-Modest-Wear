@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     // Initialize Stripe inside the function to ensure env vars are loaded
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-      apiVersion: '2024-12-18.acacia',
+      apiVersion: '2025-01-27.acacia',
     });
 
     const { items } = await req.json();
