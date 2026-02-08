@@ -36,7 +36,9 @@ export default function ProductsPage() {
 
   const calculateSubtotal = () => {
     return cart.reduce((total, item) => {
-      const price = parseFloat(item.price.replace('RM ', ''));
+      const price = typeof item.price === 'string' 
+        ? parseFloat(item.price.replace('RM ', '')) 
+        : Number(item.price);
       return total + price;
     }, 0);
   };
@@ -100,56 +102,39 @@ export default function ProductsPage() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: "#fdf5f7" }}>
-      {/* Announcement Bar */}
-      <div 
-        className="flex items-center justify-between px-8 py-3 text-white text-sm"
-        style={{ backgroundColor: "#4a3f5c" }}
-      >
-        <button className="text-white text-2xl">&lt;</button>
-        <span>A PORTION OF ALL SALES SUPPORT MUSLIM COMMUNITIES WORLDWIDE</span>
-        <button className="text-white text-2xl">&gt;</button>
-      </div>
-
       {/* Header/Navigation */}
       <header 
         className="flex items-center justify-between px-6 py-6"
         style={{ backgroundColor: "#fdf5f7" }}
       >
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <button 
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-2xl"
+            onClick={() => window.history.back()}
+            className="text-xl"
             style={{ color: "#4a3f5c" }}
+            title="Go Back"
           >
-            {menuOpen ? "✕" : "☰"}
-          </button>
-          <button className="text-xl" style={{ color: "#4a3f5c" }}>
-            🔍
+            ←
           </button>
         </div>
 
-        <h1 
-          className="text-xl tracking-wide"
-          style={{ fontFamily: "serif", color: "#4a3f5c" }}
-        >
-          Fadra Modest Wear
-        </h1>
-
-        <button 
-          onClick={() => cart.length > 0 && setShowCartModal(true)}
-          className="text-xl relative" 
-          style={{ color: "#4a3f5c" }}
-        >
-          🛍
-          {cart.length > 0 && (
-            <span 
-              className="absolute -top-2 -right-2 text-xs rounded-full px-2 py-1"
-              style={{ backgroundColor: "#c5b9d4", color: "#4a3f5c" }}
-            >
-              {cart.length}
-            </span>
-          )}
-        </button>
+        <div className="flex items-center gap-6">
+          <button 
+            onClick={() => cart.length > 0 && setShowCartModal(true)}
+            className="text-xl relative" 
+            style={{ color: "#4a3f5c" }}
+          >
+            🛍
+            {cart.length > 0 && (
+              <span 
+                className="absolute -top-2 -right-2 text-xs rounded-full px-2 py-1"
+                style={{ backgroundColor: "#c5b9d4", color: "#4a3f5c" }}
+              >
+                {cart.length}
+              </span>
+            )}
+          </button>
+        </div>
       </header>
 
       {/* Sidebar Menu */}
@@ -176,7 +161,7 @@ export default function ProductsPage() {
               className="text-xl tracking-wide"
               style={{ fontFamily: "serif", color: "#4a3f5c" }}
             >
-              Fadra Modest Wear
+              FADRA
             </h2>
             <button className="text-xl" style={{ color: "#4a3f5c" }}>
               🛍
@@ -268,12 +253,8 @@ export default function ProductsPage() {
       {/* Products Section */}
       <div className="p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-2" style={{ color: "#7d6b8f" }}>Our Products</h1>
-            <p style={{ color: "#9e8fb2" }}>Discover our collection of modest fashion</p>
-          </div>
-          {cart.length > 0 && (
+        {cart.length > 0 && (
+          <div className="flex justify-end mb-8">
             <button
               onClick={() => setShowCartModal(true)}
               className="px-6 py-3 rounded-lg font-medium transition-all duration-300"
@@ -284,8 +265,8 @@ export default function ProductsPage() {
             >
               View Cart ({cart.length} items)
             </button>
-          )}
-        </div>
+          </div>
+        )}
 
         {products.length === 0 ? (
           <p style={{ color: "#9e8fb2" }}>No products available yet.</p>
@@ -298,7 +279,15 @@ export default function ProductsPage() {
                 style={{ backgroundColor: "#fff5f9" }}
               >
                 <div className="h-64 flex items-center justify-center" style={{ backgroundColor: "#e8dff5" }}>
-                  <span className="text-gray-400 text-sm">Image placeholder</span>
+                  {product.image ? (
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-gray-400 text-sm">No image</span>
+                  )}
                 </div>
                 <div className="p-6">
                   <h2 className="text-xl font-semibold mb-2" style={{ color: "#7d6b8f" }}>
@@ -307,7 +296,7 @@ export default function ProductsPage() {
                   <p className="text-sm mb-4" style={{ color: "#9e8fb2" }}>{product.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold" style={{ color: "#7d6b8f" }}>
-                      {product.price}
+                      RM {Number(product.price).toFixed(2)}
                     </span>
                     <button
                       onClick={() => addToCart(product)}
@@ -356,7 +345,7 @@ export default function ProductsPage() {
                           <p className="text-sm" style={{ color: "#9e8fb2" }}>{item.description}</p>
                         </div>
                         <div className="flex items-center gap-4">
-                          <span className="font-bold" style={{ color: "#7d6b8f" }}>{item.price}</span>
+                          <span className="font-bold" style={{ color: "#7d6b8f" }}>RM {Number(item.price).toFixed(2)}</span>
                           <button
                             onClick={() => removeFromCart(index)}
                             className="text-red-500 hover:text-red-700"

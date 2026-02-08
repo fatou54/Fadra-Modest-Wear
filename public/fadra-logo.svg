@@ -1,0 +1,22 @@
+<svg width="120" height="100" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main FD Logo -->
+  <g transform="translate(140, 100)">
+    <!-- F part -->
+    <path d="M 0 0 Q -15 5 -20 20 Q -18 10 -10 5" stroke="currentColor" stroke-width="4" fill="none"/>
+    <rect x="0" y="0" width="90" height="15" fill="currentColor"/>
+    <rect x="0" y="0" width="15" height="200" fill="currentColor"/>
+    <rect x="0" y="95" width="75" height="15" fill="currentColor"/>
+    <rect x="30" y="30" width="15" height="60" fill="currentColor"/>
+    
+    <!-- D part -->
+    <path d="M 90 0 Q 130 0 160 30 Q 180 60 180 100 Q 180 140 160 170 Q 130 200 90 200" stroke="currentColor" stroke-width="15" fill="none"/>
+    <rect x="90" y="0" width="15" height="200" fill="currentColor"/>
+    <line x1="90" y1="190" x2="0" y2="190" stroke="currentColor" stroke-width="8"/>
+    <line x1="90" y1="10" x2="95" y2="10" stroke="currentColor" stroke-width="4"/>
+  </g>
+  
+  <!-- FADRA text -->
+  <g transform="translate(185, 330)" font-family="serif" font-size="24" fill="currentColor" letter-spacing="8">
+    <text x="0" y="0">F A D R A</text>
+  </g>
+</svg>

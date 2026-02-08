@@ -1,4 +1,12 @@
 import "./globals.css";
+import Navigation from "./components/Navigation";
+import { CartProvider } from "@/lib/cartContext";
+
+export const metadata = {
+  title: "FADRA - Luxury Modest Fashion",
+  description: "Curating the finest in luxury modest fashion for the modern world",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+};
 
 export default function RootLayout({
   children,
@@ -6,26 +14,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body style={{ margin: 0, fontFamily: "sans-serif", backgroundColor: "#fdf5f7" }}>
-        <nav
-          style={{
-            padding: "15px 30px",
-            backgroundColor: "#c5b9d4",
-            color: "#4a3f5c",
-            display: "flex",
-            gap: "20px",
-          }}
-        >
-          <a href="/" style={{ color: "#4a3f5c", textDecoration: "none" }}>
-            Home
-          </a>
-          <a href="/products" style={{ color: "#4a3f5c", textDecoration: "none" }}>
-            Products
-          </a>
-        </nav>
-
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="google-site-verification" content="3MTJK8R8X9axE9uGbQDvnahggmEihJstzxu8xOAK-Ys" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      </head>
+      <body className="antialiased" suppressHydrationWarning>
+        <CartProvider>
+          <Navigation />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
