@@ -1,0 +1,15 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Block admin and checkout pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /seed/
+Disallow: /success/
+Disallow: /subscribe-success/
+Disallow: /coming-soon/
+Disallow: /welcome/
+
+# Sitemap location
+Sitemap: https://fadra-modest-store.vercel.app/sitemap.xml
