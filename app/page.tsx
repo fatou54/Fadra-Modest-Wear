@@ -83,51 +83,58 @@ export default function HomePage() {
   return (
     <main className="relative">
       {/* Hero Section */}
-      <div 
-        className="relative h-screen w-full overflow-hidden"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&h=1080&fit=crop')",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        }}
-      >
-        <div className="absolute inset-0 bg-black opacity-40" />
+      <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-50">
+        {/* Background Image with Animation */}
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: "url('/hero-models.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            animation: "slowZoom 20s ease-in-out infinite alternate"
+          }}
+        />
         
-        <div className="relative h-full flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 z-20">
-          <div className="max-w-2xl">
+        {/* Gradient Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+        
+        {/* Content Container */}
+        <div className="relative h-full flex items-center px-6 md:px-12 lg:px-20 xl:px-28 z-20">
+          <div className="max-w-2xl lg:max-w-3xl">
             {/* Collection Tag */}
             <p 
-              className="text-xs md:text-sm tracking-widest mb-6"
+              className="text-xs md:text-sm tracking-[0.3em] mb-6 animate-fadeIn"
               style={{ 
                 color: "#d4a574",
-                fontWeight: 400, 
-                letterSpacing: "0.3em" 
+                fontWeight: 400
               }}
             >
-              SPRING / SUMMER 2026 COLLECTION
+              SPRING / SUMMER COLLECTION
             </p>
 
             {/* Main Heading */}
             <h1 
-              className="text-6xl md:text-7xl lg:text-8xl mb-4"
+              className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-4 animate-fadeIn"
               style={{ 
-                fontFamily: "serif", 
+                fontFamily: "Georgia, 'Times New Roman', serif", 
                 color: "#ffffff",
                 fontWeight: 400,
-                lineHeight: 1.1
+                lineHeight: 1,
+                animationDelay: "0.2s"
               }}
             >
               Redefine
             </h1>
             
             <h1 
-              className="text-6xl md:text-7xl lg:text-8xl mb-8"
+              className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl mb-8 animate-fadeIn"
               style={{ 
-                fontFamily: "Georgia, serif", 
+                fontFamily: "Georgia, 'Times New Roman', serif", 
                 color: "#d4a574",
                 fontStyle: "italic",
                 fontWeight: 400,
-                lineHeight: 1.1
+                lineHeight: 1,
+                animationDelay: "0.4s"
               }}
             >
               Elegance
@@ -135,48 +142,82 @@ export default function HomePage() {
 
             {/* Description */}
             <p 
-              className="text-base md:text-lg mb-10 leading-relaxed max-w-xl"
+              className="text-base md:text-lg lg:text-xl mb-10 leading-relaxed max-w-xl animate-fadeIn"
               style={{ 
-                color: "#e5e5e5", 
+                color: "#f5f5f5", 
                 fontWeight: 300,
-                lineHeight: 1.8
+                lineHeight: 1.8,
+                animationDelay: "0.6s"
               }}
             >
-              Discover curated luxury fashion for men and women.<br />
-              From haute couture to everyday elegance.
+              Discover luxury modest fashion for men and women.<br className="hidden sm:block" />
+              From everyday sophistication to statement looks.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 animate-fadeIn" style={{ animationDelay: "0.8s" }}>
               <a
                 href="/women"
-                className="px-8 py-4 text-sm tracking-widest font-medium hover:opacity-90 transition-all duration-300 text-center"
+                className="group px-10 py-4 text-sm tracking-[0.2em] font-semibold transition-all duration-500 text-center relative overflow-hidden"
                 style={{ 
                   backgroundColor: "#d4a574",
-                  color: "#1a1a1a",
-                  letterSpacing: "0.2em",
-                  fontWeight: 600
+                  color: "#1a1a1a"
                 }}
               >
-                SHOP WOMEN
+                <span className="relative z-10">SHOP WOMEN</span>
+                <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ opacity: 0.2 }} />
               </a>
               <a
                 href="/men"
-                className="px-8 py-4 text-sm tracking-widest font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-300 text-center"
+                className="group px-10 py-4 text-sm tracking-[0.2em] font-medium transition-all duration-500 text-center relative overflow-hidden"
                 style={{ 
-                  backgroundColor: "transparent",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
                   color: "#ffffff",
-                  letterSpacing: "0.2em",
-                  border: "2px solid #ffffff",
-                  fontWeight: 500
+                  border: "2px solid rgba(255, 255, 255, 0.8)",
+                  backdropFilter: "blur(10px)"
                 }}
               >
-                SHOP MEN
+                <span className="relative z-10">SHOP MEN</span>
+                <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ opacity: 0.1 }} />
               </a>
             </div>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
+            <div className="w-1 h-2 bg-white/70 rounded-full" />
+          </div>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes slowZoom {
+          0% {
+            transform: scale(1);
+          }
+          100% {
+            transform: scale(1.1);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
 
       {/* Features Section */}
       <section className="py-16 px-8" style={{ backgroundColor: "#f8f8f8" }}>
