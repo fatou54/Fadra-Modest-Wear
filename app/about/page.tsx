@@ -3,11 +3,6 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Us - FADRA Luxury Modest Fashion",
   description: "Learn about FADRA's mission to curate the finest luxury modest fashion. Discover our story, values, and commitment to quality and authenticity.",
-  openGraph: {
-    title: "About FADRA - Luxury Modest Fashion",
-    description: "Learn about FADRA's mission to curate the finest luxury modest fashion for the modern world.",
-    url: "https://fadra-modest-store.vercel.app/about",
-  },
 };
 
 export default function AboutPage() {

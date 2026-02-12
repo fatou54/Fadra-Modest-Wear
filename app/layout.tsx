@@ -5,42 +5,7 @@ import { CartProvider } from "@/lib/cartContext";
 export const metadata = {
   title: "FADRA - Luxury Modest Fashion",
   description: "Curating the finest in luxury modest fashion for the modern world. Shop premium abayas, hijabs, modest dresses, and luxury accessories for women and men.",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
-  keywords: "modest fashion, luxury abayas, hijabs, modest dresses, islamic fashion, modest clothing, women modest wear, men modest wear",
-  authors: [{ name: "FADRA" }],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://fadra-modest-store.vercel.app",
-    siteName: "FADRA",
-    title: "FADRA - Luxury Modest Fashion",
-    description: "Curating the finest in luxury modest fashion for the modern world. Shop premium abayas, hijabs, modest dresses, and luxury accessories.",
-    images: [
-      {
-        url: "https://fadra-modest-store.vercel.app/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "FADRA Luxury Modest Fashion",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "FADRA - Luxury Modest Fashion",
-    description: "Curating the finest in luxury modest fashion for the modern world",
-    images: ["https://fadra-modest-store.vercel.app/og-image.jpg"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+  keywords: "modest fashion, luxury abayas, hijabs, modest dresses, islamic fashion, modest clothing",
 };
 
 export default function RootLayout({
