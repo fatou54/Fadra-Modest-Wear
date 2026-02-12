@@ -200,7 +200,6 @@ export default function ProductDetailPage() {
       name: product.name,
       price: product.price,
       image: product.images[0],
-      quantity: quantity,
     });
     
     alert('Added to cart!');

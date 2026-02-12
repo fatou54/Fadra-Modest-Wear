@@ -190,7 +190,6 @@ export default function TrendingPage() {
       name: product.name,
       price: product.price,
       image: product.image,
-      quantity: 1,
     });
     alert('Added to cart!');
   };
