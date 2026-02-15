@@ -88,7 +88,7 @@ export default function HomePage() {
         <div 
           className="absolute inset-0 w-full h-full"
           style={{
-            backgroundImage: "url('/hero-models.jpg')",
+            backgroundImage: "url('https://images.pexels.com/photos/7679454/pexels-photo-7679454.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080')",
             backgroundSize: "cover",
             backgroundPosition: "center center",
             animation: "slowZoom 20s ease-in-out infinite alternate"

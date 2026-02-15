@@ -31,8 +31,7 @@ export default function SeedPage() {
         
         <p className="mb-6 text-gray-600">
           Click the button below to populate your database with initial products.
-          Note: The product images reference placeholder paths. You&apos;ll need to add actual
-          images through the admin panel.
+          This will add sample products with images from Unsplash.
         </p>
         
         <button

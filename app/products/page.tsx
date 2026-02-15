@@ -278,16 +278,25 @@ export default function ProductsPage() {
                 className="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 style={{ backgroundColor: "#fff5f9" }}
               >
-                <div className="h-64 flex items-center justify-center" style={{ backgroundColor: "#e8dff5" }}>
+                <div className="h-64 flex items-center justify-center relative overflow-hidden" style={{ backgroundColor: "#e8dff5" }}>
                   {product.image ? (
                     <img 
                       src={product.image} 
                       alt={product.name} 
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      onError={(e) => {
+                        console.error('Image failed to load:', product.image);
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.parentElement?.querySelector('.error-msg')?.classList.remove('hidden');
+                      }}
+                      onLoad={(e) => {
+                        console.log('Image loaded successfully:', product.name);
+                      }}
                     />
-                  ) : (
-                    <span className="text-gray-400 text-sm">No image</span>
-                  )}
+                  ) : null}
+                  <span className="error-msg hidden text-gray-400 text-sm absolute">Failed to load image</span>
+                  {!product.image && <span className="text-gray-400 text-sm">No image</span>}
                 </div>
                 <div className="p-6">
                   <h2 className="text-xl font-semibold mb-2" style={{ color: "#7d6b8f" }}>
