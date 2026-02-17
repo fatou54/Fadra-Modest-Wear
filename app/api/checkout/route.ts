@@ -1,7 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { rateLimit, getIP } from '@/lib/rateLimit';
 
 export async function POST(req: NextRequest) {
+  // Rate limiting: 5 checkout attempts per minute per IP
+  const ip = getIP(req);
+  const limiter = rateLimit(ip, { interval: 60000, maxRequests: 5 });
+
+  if (!limiter.success) {
+    return NextResponse.json(
+      { 
+        error: 'Too many checkout attempts. Please try again later.',
+        retryAfter: limiter.reset 
+      },
+      { 
+        status: 429,
+        headers: {
+          'Retry-After': limiter.reset.toString(),
+          'X-RateLimit-Limit': limiter.limit.toString(),
+          'X-RateLimit-Remaining': limiter.remaining.toString(),
+          'X-RateLimit-Reset': limiter.reset.toString(),
+        }
+      }
+    );
+  }
+
   try {
     // Initialize Stripe inside the function to ensure env vars are loaded
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
