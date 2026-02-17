@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navigation from "./components/Navigation";
 import { CartProvider } from "@/lib/cartContext";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 export const metadata = {
   metadataBase: new URL('https://fadra-modest-store.vercel.app'),
@@ -89,6 +90,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased" suppressHydrationWarning>
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
         <CartProvider>
           <Navigation />
           {children}

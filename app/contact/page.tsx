@@ -8,11 +8,45 @@ export default function ContactPage() {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for contacting us! We'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Thank you for contacting us! We will get back to you soon.',
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.',
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -35,6 +69,16 @@ export default function ContactPage() {
               Send Us a Message
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
+              {submitStatus && (
+                <div 
+                  className={`p-4 rounded-lg ${submitStatus.type === 'success' ? 'bg-green-50' : 'bg-red-50'}`}
+                >
+                  <p className={`text-sm ${submitStatus.type === 'success' ? 'text-green-800' : 'text-red-800'}`}>
+                    {submitStatus.message}
+                  </p>
+                </div>
+              )}
+              
               <div>
                 <label className="block text-sm font-medium mb-2" style={{ color: "#333" }}>
                   Name
@@ -79,10 +123,11 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+                disabled={isSubmitting}
+                className="w-full py-3 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ backgroundColor: "#1a1a1a", color: "#ffffff" }}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
