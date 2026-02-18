@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navigation from "./components/Navigation";
 import { CartProvider } from "@/lib/cartContext";
+import { AuthProvider } from "@/lib/authContext";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
 export const metadata = {
@@ -93,10 +94,12 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
-        <CartProvider>
-          <Navigation />
-          {children}
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Navigation />
+            {children}
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

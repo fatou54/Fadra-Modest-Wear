@@ -14,6 +14,26 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Define public paths that don't require authentication
+  const publicPaths = [
+    '/login',
+    '/signup',
+    '/verify-email',
+    '/about',
+    '/contact',
+    '/privacy',
+    '/terms',
+    '/faq',
+    '/authenticity',
+    '/quality',
+    '/shipping-info',
+    '/returns-exchanges',
+    '/size-guide',
+  ];
+
+  // Check if the current path is public
+  const isPublicPath = publicPaths.some(path => pathname.startsWith(path));
+
   // Apply stricter rate limits to API routes
   if (pathname.startsWith('/api/')) {
     const result = await checkRateLimit(request, { 

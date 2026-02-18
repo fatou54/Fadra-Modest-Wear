@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function HomePage() {
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -81,7 +82,8 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative">
+    <ProtectedRoute requireVerified={false}>
+      <main className="relative">
       {/* Hero Section */}
       <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-50">
         {/* Background Image with Animation */}
@@ -1155,6 +1157,7 @@ export default function HomePage() {
         </div>
       </footer>
     </main>
+    </ProtectedRoute>
   );
 }
 
