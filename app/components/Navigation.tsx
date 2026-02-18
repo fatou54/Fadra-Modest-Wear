@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useCart } from "@/lib/cartContext";
-import CartModal from "./CartModal";
+import { useAuth } from "@/lib/authContext";
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,11 +10,9 @@ export default function Navigation() {
   const [menDropdown, setMenDropdown] = useState(false);
   const [mobileWomenOpen, setMobileWomenOpen] = useState(false);
   const [mobileMenOpen, setMobileMenOpen] = useState(false);
-  const [showCart, setShowCart] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [accountDropdown, setAccountDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const { getItemCount } = useCart();
+  const { user, userProfile, signOut } = useAuth();
 
   return (
     <>
@@ -85,7 +82,7 @@ export default function Navigation() {
 
         {/* Right Side - Icons */}
         <div style={{ display: "flex", gap: "24px", alignItems: "center", flex: 1, justifyContent: "flex-end" }}>
-          {/* Search Icon 🔍 */}
+          {/* Search Icon */}
           <button
             onClick={() => setShowSearch(true)}
             style={{
@@ -93,132 +90,63 @@ export default function Navigation() {
               border: "none",
               cursor: "pointer",
               padding: "0",
-              fontSize: "22px",
-              transition: "transform 0.2s"
+              transition: "opacity 0.3s"
             }}
-            className="hover:scale-110 hidden sm:block"
+            className="hover:opacity-70 hidden sm:block"
             aria-label="Search"
           >
-            🔍
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ color: "#000000" }}>
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
           </button>
 
-          {/* Wishlist Icon ❤️ */}
-          <Link
-            href="/wishlist"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "0",
-              fontSize: "22px",
-              transition: "transform 0.2s",
-              textDecoration: "none"
-            }}
-            className="hover:scale-110 hidden sm:block"
-            aria-label="Wishlist"
-          >
-            ❤️
-          </Link>
-
-          {/* Account Icon 👤 */}
-          <div style={{ position: "relative" }}>
-            <button
-              onClick={() => setAccountDropdown(!accountDropdown)}
+          {/* User Account Icon */}
+          {user ? (
+            <Link
+              href="/admin"
               style={{
                 background: "none",
                 border: "none",
                 cursor: "pointer",
                 padding: "0",
-                fontSize: "22px",
-                transition: "transform 0.2s"
+                transition: "opacity 0.3s",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                textDecoration: "none",
+                color: "#000000"
               }}
-              className="hover:scale-110"
-              aria-label="Account"
+              className="hover:opacity-70"
+              title={`Welcome, ${userProfile?.displayName || user.email}`}
             >
-              👤
-            </button>
-
-            {/* Account Dropdown */}
-            {accountDropdown && (
-              <>
-                <div
-                  style={{
-                    position: "fixed",
-                    inset: 0,
-                    zIndex: 1998
-                  }}
-                  onClick={() => setAccountDropdown(false)}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "calc(100% + 12px)",
-                    right: 0,
-                    backgroundColor: "#ffffff",
-                    border: "1px solid #e5e5e5",
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
-                    minWidth: "240px",
-                    zIndex: 1999,
-                    borderRadius: "8px",
-                    overflow: "hidden"
-                  }}
-                >
-                  <div style={{ padding: "16px 20px", borderBottom: "1px solid #f0f0f0", backgroundColor: "#f8f8f8" }}>
-                    <p style={{ fontSize: "14px", fontWeight: "600", color: "#1a1a1a", margin: 0 }}>My Account</p>
-                    <p style={{ fontSize: "12px", color: "#666", margin: "4px 0 0 0" }}>Manage your profile</p>
-                  </div>
-                  <Link href="/account" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>👤 Profile Info</Link>
-                  <Link href="/account/orders" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>📦 My Orders</Link>
-                  <Link href="/account/tracking" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>📍 Order Tracking</Link>
-                  <Link href="/account/addresses" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>🏠 Addresses</Link>
-                  <Link href="/account/payment" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>💳 Payment Methods</Link>
-                  <Link href="/wishlist" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>❤️ Wishlist</Link>
-                  <Link href="/account/returns" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>↩️ Returns & Refunds</Link>
-                  <Link href="/account/settings" onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ display: "block", padding: "12px 20px", color: "#1a1a1a", textDecoration: "none", fontSize: "14px", borderBottom: "1px solid #f5f5f5", transition: "background 0.2s" }}>⚙️ Password Settings</Link>
-                  <button onClick={() => setAccountDropdown(false)} className="hover:bg-[#f8f8f8]" style={{ width: "100%", display: "block", padding: "12px 20px", color: "#d4a574", textDecoration: "none", fontSize: "14px", fontWeight: "600", textAlign: "left", background: "none", border: "none", cursor: "pointer", transition: "background 0.2s" }}>🚪 Logout</button>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Shopping Cart Icon 🛒 */}
-          <button
-            onClick={() => setShowCart(true)}
-            style={{
-              position: "relative",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "0",
-              fontSize: "22px",
-              transition: "transform 0.2s"
-            }}
-            className="hover:scale-110"
-            aria-label="Shopping Cart"
-          >
-            🛒
-            {getItemCount() > 0 && (
-              <span
-                style={{
-                  position: "absolute",
-                  top: "-8px",
-                  right: "-8px",
-                  backgroundColor: "#d4a574",
-                  color: "#ffffff",
-                  borderRadius: "50%",
-                  width: "20px",
-                  height: "20px",
-                  fontSize: "11px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "600"
-                }}
-              >
-                {getItemCount()}
-              </span>
-            )}
-          </button>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span className="hidden md:inline" style={{ fontSize: "13px" }}>Account</span>
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              style={{
+                background: "none",
+                cursor: "pointer",
+                padding: "8px 16px",
+                transition: "all 0.3s",
+                textDecoration: "none",
+                color: "#000000",
+                fontSize: "13px",
+                fontWeight: "500",
+                letterSpacing: "0.05em",
+                border: "1px solid #1a1a1a",
+                borderRadius: "4px"
+              }}
+              className="hover:bg-[#1a1a1a] hover:text-white"
+            >
+              LOGIN
+            </Link>
+          )}
         </div>
       </nav>
 
@@ -446,9 +374,6 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Cart Modal */}
-      {showCart && <CartModal onClose={() => setShowCart(false)} />}
-
       {/* Mobile Menu Overlay */}
       {menuOpen && (
         <>
@@ -585,6 +510,30 @@ export default function Navigation() {
               {/* Divider */}
               <div style={{ height: "1px", backgroundColor: "#e5e5e5", margin: "20px 0" }} />
 
+              {/* User Account Section */}
+              <div style={{ marginBottom: "20px" }}>
+                <h3 style={{ fontSize: "14px", fontWeight: "600", color: "#1a1a1a", marginBottom: "15px", textTransform: "uppercase", letterSpacing: "0.05em" }}>My Account</h3>
+                {user ? (
+                  <>
+                    <div style={{ padding: "12px 0", color: "#1a1a1a", fontSize: "14px", marginBottom: "10px" }}>
+                      Welcome, {userProfile?.displayName || user.email?.split('@')[0]}
+                    </div>
+                    <Link href="/admin" onClick={() => setMenuOpen(false)} style={{ display: "block", padding: "10px 0", color: "#666", textDecoration: "none", fontSize: "14px" }}>My Dashboard</Link>
+                    <button 
+                      onClick={() => { signOut(); setMenuOpen(false); }} 
+                      style={{ display: "block", padding: "10px 0", color: "#666", textDecoration: "none", fontSize: "14px", background: "none", border: "none", cursor: "pointer", width: "100%", textAlign: "left" }}
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/login" onClick={() => setMenuOpen(false)} style={{ display: "block", padding: "10px 0", color: "#666", textDecoration: "none", fontSize: "14px" }}>Login</Link>
+                    <Link href="/signup" onClick={() => setMenuOpen(false)} style={{ display: "block", padding: "10px 0", color: "#666", textDecoration: "none", fontSize: "14px" }}>Sign Up</Link>
+                  </>
+                )}
+              </div>
+
               {/* Customer Care Links */}
               <div style={{ marginTop: "20px" }}>
                 <h3 style={{ fontSize: "14px", fontWeight: "600", color: "#1a1a1a", marginBottom: "15px", textTransform: "uppercase", letterSpacing: "0.05em" }}>Customer Care</h3>
@@ -628,7 +577,13 @@ export default function Navigation() {
           >
             {/* Search Header */}
             <div style={{ padding: "24px", borderBottom: "1px solid #e5e5e5", display: "flex", justifyContent: "space-between", alignItems: "center", backgroundColor: "#f8f8f8" }}>
-              <h2 style={{ fontSize: "20px", fontWeight: "600", color: "#1a1a1a", margin: 0 }}>🔍 Search Products</h2>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ color: "#000000" }}>
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <h2 style={{ fontSize: "20px", fontWeight: "600", color: "#1a1a1a", margin: 0 }}>Search Products</h2>
+              </div>
               <button
                 onClick={() => setShowSearch(false)}
                 style={{
@@ -647,24 +602,34 @@ export default function Navigation() {
 
             {/* Search Input */}
             <div style={{ padding: "20px" }}>
-              <input
-                type="text"
-                placeholder="Search for products, categories..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                autoFocus
-                style={{
-                  width: "100%",
-                  padding: "14px 20px",
-                  fontSize: "15px",
-                  border: "2px solid #e5e5e5",
-                  borderRadius: "8px",
-                  outline: "none",
-                  transition: "border-color 0.3s"
-                }}
-                onFocus={(e) => e.target.style.borderColor = "#d4a574"}
-                onBlur={(e) => e.target.style.borderColor = "#e5e5e5"}
-              />
+              <div style={{ display: "flex", alignItems: "center", border: "2px solid #e5e5e5", borderRadius: "8px", padding: "12px 16px", backgroundColor: "#ffffff", transition: "border-color 0.3s" }} className="search-input-wrapper">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ color: "#9ca3af", marginRight: "10px", flexShrink: 0 }}>
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                  style={{
+                    width: "100%",
+                    border: "none",
+                    outline: "none",
+                    fontSize: "15px",
+                    color: "#1a1a1a"
+                  }}
+                  onFocus={(e) => {
+                    const wrapper = e.target.parentElement;
+                    if (wrapper) wrapper.style.borderColor = "#d4a574";
+                  }}
+                  onBlur={(e) => {
+                    const wrapper = e.target.parentElement;
+                    if (wrapper) wrapper.style.borderColor = "#e5e5e5";
+                  }}
+                />
+              </div>
             </div>
 
             {/* Recent Searches */}
