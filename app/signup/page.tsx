@@ -72,46 +72,54 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: '#faf9f7' }}>
+    <div className="min-h-screen flex" style={{ backgroundColor: '#f5f3f0' }}>
       {/* Left Side - Image (Hidden on mobile) */}
       <div 
         className="hidden lg:flex lg:w-1/2 relative overflow-hidden"
         style={{
-          backgroundImage: "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=1200&h=1600&fit=crop')",
+          backgroundImage: "linear-gradient(rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0.4)), url('https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=1200&h=1600&fit=crop&q=80')",
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
-        <div className="relative z-10 flex flex-col justify-end p-12 text-white">
-          <h2 className="text-4xl font-serif font-bold mb-4">
-            Modesty. Elegance. Confidence.
-          </h2>
-          <p className="text-lg opacity-90 leading-relaxed max-w-md">
-            Join our community of discerning customers who appreciate timeless beauty and premium quality in modest fashion.
-          </p>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-transparent" />
+        <div className="relative z-10 flex flex-col justify-center items-center h-full p-12 text-white text-center">
+          <div className="max-w-lg">
+            <h2 className="text-5xl font-serif font-bold mb-6" style={{ letterSpacing: '0.02em' }}>
+              Join FADRA
+            </h2>
+            <p className="text-xl opacity-95 leading-relaxed mb-8" style={{ fontWeight: '300' }}>
+              Modesty. Elegance. Confidence.
+            </p>
+            <p className="text-base opacity-85 leading-relaxed">
+              Join our community of discerning customers who appreciate timeless beauty and premium quality in modest fashion.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12" style={{ backgroundColor: '#fafaf8' }}>
         <div className="w-full max-w-md">
-          {/* Logo */}
-          <div className="text-center mb-8 animate-fadeIn">
+          {/* Logo - Larger and More Prominent */}
+          <div className="text-center mb-12 animate-fadeIn">
             <Link href="/" className="inline-block">
-              <h1 className="text-4xl sm:text-5xl font-serif font-bold tracking-wider mb-2" style={{ color: '#1a1a1a' }}>
+              <h1 className="text-5xl sm:text-6xl font-serif font-bold tracking-wider mb-3" style={{ color: '#1a1a1a', letterSpacing: '0.1em' }}>
                 FADRA
               </h1>
-              <p className="text-xs tracking-[0.3em] uppercase" style={{ color: '#d4a574' }}>
+              <p className="text-sm tracking-[0.25em] uppercase mb-4" style={{ color: '#d4a574', fontWeight: '500' }}>
                 Luxury Modest Fashion
+              </p>
+              <p className="text-xs italic" style={{ color: '#666', letterSpacing: '0.05em' }}>
+                Modesty. Elegance. Confidence.
               </p>
             </Link>
           </div>
 
           {/* Welcome Text */}
           <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-3" style={{ color: '#1a1a1a' }}>
-              Create Your Account
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-3" style={{ color: '#1a1a1a', letterSpacing: '0.02em' }}>
+              Create Your FADRA Account
             </h2>
             <p className="text-sm" style={{ color: '#666' }}>
               Join our community and enjoy worldwide shipping
@@ -253,10 +261,14 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 px-6 rounded-lg font-semibold text-white transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full py-4 px-6 font-semibold text-white transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-xl"
               style={{
                 backgroundColor: '#1a1a1a',
-                backgroundImage: loading ? 'none' : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)'
+                backgroundImage: loading ? 'none' : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+                borderRadius: '8px',
+                fontSize: '15px',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase'
               }}
             >
               {loading ? (

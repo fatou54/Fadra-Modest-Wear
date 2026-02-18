@@ -119,28 +119,31 @@ export default function LoginPage() {
 
   if (show2FA) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#faf9f7' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#f5f3f0' }}>
         <div className="max-w-md w-full mx-4">
-          <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12 animate-fadeIn">
+          <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12 animate-fadeIn" style={{ backgroundColor: '#fafaf8' }}>
             {/* Logo */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-10">
               <Link href="/" className="inline-block">
-                <h1 className="text-4xl font-serif font-bold tracking-wider mb-2" style={{ color: '#1a1a1a' }}>
+                <h1 className="text-5xl font-serif font-bold tracking-wider mb-3" style={{ color: '#1a1a1a', letterSpacing: '0.1em' }}>
                   FADRA
                 </h1>
-                <p className="text-xs tracking-[0.3em] uppercase" style={{ color: '#d4a574' }}>
+                <p className="text-sm tracking-[0.25em] uppercase mb-4" style={{ color: '#d4a574', fontWeight: '500' }}>
                   Luxury Modest Fashion
+                </p>
+                <p className="text-xs italic" style={{ color: '#666', letterSpacing: '0.05em' }}>
+                  Modesty. Elegance. Confidence.
                 </p>
               </Link>
             </div>
 
             <div className="text-center mb-8">
-              <div className="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 mb-4">
-                <svg className="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full mb-4" style={{ backgroundColor: '#d4a574' }}>
+                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-serif font-bold mb-2" style={{ color: '#1a1a1a' }}>
+              <h2 className="text-2xl font-serif font-bold mb-2" style={{ color: '#1a1a1a', letterSpacing: '0.02em' }}>
                 Two-Factor Authentication
               </h2>
               <p className="text-sm" style={{ color: '#666' }}>
@@ -211,23 +214,26 @@ export default function LoginPage() {
 
   if (showResetPassword) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#faf9f7' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#f5f3f0' }}>
         <div className="max-w-md w-full mx-4">
-          <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12 animate-fadeIn">
+          <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12 animate-fadeIn" style={{ backgroundColor: '#fafaf8' }}>
             {/* Logo */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-10">
               <Link href="/" className="inline-block">
-                <h1 className="text-4xl font-serif font-bold tracking-wider mb-2" style={{ color: '#1a1a1a' }}>
+                <h1 className="text-5xl font-serif font-bold tracking-wider mb-3" style={{ color: '#1a1a1a', letterSpacing: '0.1em' }}>
                   FADRA
                 </h1>
-                <p className="text-xs tracking-[0.3em] uppercase" style={{ color: '#d4a574' }}>
+                <p className="text-sm tracking-[0.25em] uppercase mb-4" style={{ color: '#d4a574', fontWeight: '500' }}>
                   Luxury Modest Fashion
+                </p>
+                <p className="text-xs italic" style={{ color: '#666', letterSpacing: '0.05em' }}>
+                  Modesty. Elegance. Confidence.
                 </p>
               </Link>
             </div>
 
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-serif font-bold mb-2" style={{ color: '#1a1a1a' }}>
+              <h2 className="text-2xl font-serif font-bold mb-2" style={{ color: '#1a1a1a', letterSpacing: '0.02em' }}>
                 Reset Your Password
               </h2>
               <p className="text-sm" style={{ color: '#666' }}>
@@ -294,46 +300,54 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: '#faf9f7' }}>
+    <div className="min-h-screen flex" style={{ backgroundColor: '#f5f3f0' }}>
       {/* Left Side - Image (Hidden on mobile) */}
       <div 
         className="hidden lg:flex lg:w-1/2 relative overflow-hidden"
         style={{
-          backgroundImage: "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200&h=1600&fit=crop')",
+          backgroundImage: "linear-gradient(rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0.4)), url('https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=1200&h=1600&fit=crop&q=80')",
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
-        <div className="relative z-10 flex flex-col justify-end p-12 text-white">
-          <h2 className="text-4xl font-serif font-bold mb-4">
-            Welcome Back
-          </h2>
-          <p className="text-lg opacity-90 leading-relaxed max-w-md">
-            Sign in to continue your journey with FADRA's curated collection of luxury modest fashion.
-          </p>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-transparent" />
+        <div className="relative z-10 flex flex-col justify-center items-center h-full p-12 text-white text-center">
+          <div className="max-w-lg">
+            <h2 className="text-5xl font-serif font-bold mb-6" style={{ letterSpacing: '0.02em' }}>
+              Welcome Back
+            </h2>
+            <p className="text-xl opacity-95 leading-relaxed mb-8" style={{ fontWeight: '300' }}>
+              Modesty. Elegance. Confidence.
+            </p>
+            <p className="text-base opacity-85 leading-relaxed">
+              Sign in to continue your journey with FADRA's curated collection of luxury modest fashion.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12" style={{ backgroundColor: '#fafaf8' }}>
         <div className="w-full max-w-md">
-          {/* Logo */}
-          <div className="text-center mb-8 animate-fadeIn">
+          {/* Logo - Larger and More Prominent */}
+          <div className="text-center mb-12 animate-fadeIn">
             <Link href="/" className="inline-block">
-              <h1 className="text-4xl sm:text-5xl font-serif font-bold tracking-wider mb-2" style={{ color: '#1a1a1a' }}>
+              <h1 className="text-5xl sm:text-6xl font-serif font-bold tracking-wider mb-3" style={{ color: '#1a1a1a', letterSpacing: '0.1em' }}>
                 FADRA
               </h1>
-              <p className="text-xs tracking-[0.3em] uppercase" style={{ color: '#d4a574' }}>
+              <p className="text-sm tracking-[0.25em] uppercase mb-4" style={{ color: '#d4a574', fontWeight: '500' }}>
                 Luxury Modest Fashion
+              </p>
+              <p className="text-xs italic" style={{ color: '#666', letterSpacing: '0.05em' }}>
+                Modesty. Elegance. Confidence.
               </p>
             </Link>
           </div>
 
           {/* Welcome Text */}
           <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-3" style={{ color: '#1a1a1a' }}>
-              Welcome Back
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-3" style={{ color: '#1a1a1a', letterSpacing: '0.02em' }}>
+              Welcome Back to FADRA
             </h2>
             <p className="text-sm" style={{ color: '#666' }}>
               Sign in to continue your modest journey with us
@@ -421,10 +435,14 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 px-6 rounded-lg font-semibold text-white transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full py-4 px-6 font-semibold text-white transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-xl"
               style={{
                 backgroundColor: '#1a1a1a',
-                backgroundImage: loading ? 'none' : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)'
+                backgroundImage: loading ? 'none' : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+                borderRadius: '8px',
+                fontSize: '15px',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase'
               }}
             >
               {loading ? (
